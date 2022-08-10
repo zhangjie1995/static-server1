@@ -32,9 +32,13 @@ var server = http.createServer(function (request, response) {
     html: "text/html",
     css: "text/css",
     js: "text/javascript",
+    jpg: "image/png",
   };
   let suffix = string.substring(string.lastIndexOf(".") + 1);
-  response.setHeader("Content-Type", `${suffixArr[suffix]};charset=utf-8`);
+  response.setHeader(
+    "Content-Type",
+    `${suffixArr[suffix] || "text/html"};charset=utf-8`
+  );
   try {
     response.write(fs.readFileSync("./public" + string));
   } catch (e) {
